@@ -4,6 +4,9 @@
 
 use \BookApiWrapper\BookApiWrapper;
 
+
+require_once 'mocks/MockAuthorRequest.php';
+
 class WrapperTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
@@ -13,7 +16,8 @@ class WrapperTest extends PHPUnit_Framework_TestCase
 
     public function testGetAuthors()
     {
-        $wrapper = new BookApiWrapper(new \BookApiWrapper\Api\CurlRequest());
+        $client = new MockAuthorRequest();
+        $wrapper = new BookApiWrapper($client);
 
         $authorsCount = 2;
         $authors = $wrapper->getAuthors($authorsCount);

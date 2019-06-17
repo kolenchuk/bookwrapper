@@ -13,6 +13,9 @@ use BookApiWrapper\Entity\Author;
 
 class BookApiWrapper
 {
+    /**
+     * @var ApiClientInterface
+     */
     private $client;
 
     public function __construct(ApiClientInterface $client = null)
