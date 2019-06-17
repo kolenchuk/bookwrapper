@@ -15,8 +15,11 @@ class BookApiWrapper
 {
     private $client;
 
-    public function __construct(ApiClientInterface $client)
+    public function __construct(ApiClientInterface $client = null)
     {
+        if (is_null($client)) {
+            $client = new CurlRequest();
+        }
         $this->client = $client;
     }
 
