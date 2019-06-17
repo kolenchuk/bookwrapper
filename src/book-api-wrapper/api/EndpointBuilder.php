@@ -7,6 +7,24 @@ namespace BookApiWrapper\Api;
 
 class EndpointBuilder
 {
+    private static function getBaseEndpoint()
+    {
+        return 'http://94.254.0.188:4000';
+    }
+
+    private static function getParams($limit, $offset)
+    {
+        $params = [];
+        if (!empty($limit)) {
+            $params[] = 'limit=' . $limit;
+        }
+
+        if (!empty($offset)) {
+            $params[] = 'offset=' . $offset;
+        }
+
+        return (!empty($params)) ? '?' . implode('&', $params) : '';
+    }
 
     /**
      * Get endpoint for authors request
@@ -17,29 +35,16 @@ class EndpointBuilder
      */
     public static function getAuthors($limit = 0, $offset = 0)
     {
-        $params = [];
-        if (!empty($limit)) {
-            $params[] = 'limit=' . $limit;
-        }
-
-        if (!empty($offset)) {
-            $params[] = 'offset=' . $offset;
-        }
-
-        return 'http://94.254.0.188:4000/authors' . ((!empty($params)) ? '?' . implode('&', $params) : '');
+        return static::getBaseEndpoint() . '/authors' . static::getParams($limit, $offset);
     }
 
+    /**
+     * @param int $limit
+     * @param int $offset
+     * @return string
+     */
     public static function getBooks($limit = 0, $offset = 0)
     {
-        $params = [];
-        if (!empty($limit)) {
-            $params[] = 'limit=' . $limit;
-        }
-
-        if (!empty($offset)) {
-            $params[] = 'offset=' . $offset;
-        }
-
-        return 'http://94.254.0.188:4000/books' . ((!empty($params)) ? '?' . implode('&', $params) : '');
+        return static::getBaseEndpoint() . '/books' . static::getParams($limit, $offset);
     }
 }
