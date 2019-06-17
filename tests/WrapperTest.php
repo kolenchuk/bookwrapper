@@ -13,7 +13,7 @@ class WrapperTest extends PHPUnit_Framework_TestCase
 
     public function testGetAuthors()
     {
-        $wrapper = new BookApiWrapper();
+        $wrapper = new BookApiWrapper(new \BookApiWrapper\Api\CurlRequest());
 
         $authorsCount = 2;
         $authors = $wrapper->getAuthors($authorsCount);

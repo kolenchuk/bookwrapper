@@ -4,6 +4,7 @@
 
 namespace BookApiWrapper;
 
+use BookApiWrapper\Api\ApiClientInterface;
 use BookApiWrapper\Api\CurlRequest;
 use BookApiWrapper\Api\EndpointBuilder;
 use BookApiWrapper\Api\Response;
@@ -12,11 +13,17 @@ use BookApiWrapper\Entity\Author;
 
 class BookApiWrapper
 {
+    private $client;
+
+    public function __construct(ApiClientInterface $client)
+    {
+        $this->client = $client;
+    }
+
     public function getAuthors($limit = 0, $offset = 0)
     {
         $endpoint = EndpointBuilder::getAuthors($limit, $offset);
-        $request = new CurlRequest();
-        $responseBody = $request->get($endpoint);
+        $responseBody = $this->client->get($endpoint);
 
         $responseParser = new ResponseParser($responseBody);
 

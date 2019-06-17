@@ -5,7 +5,7 @@
 namespace BookApiWrapper\Api;
 
 
-class CurlRequest
+class CurlRequest implements ApiClientInterface
 {
     /**
      * @var array default curl options
