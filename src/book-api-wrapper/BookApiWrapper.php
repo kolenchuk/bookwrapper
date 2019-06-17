@@ -29,11 +29,17 @@ class BookApiWrapper
     public function getAuthors($limit = 0, $offset = 0)
     {
         $endpoint = EndpointBuilder::getAuthors($limit, $offset);
-        $responseBody = $this->client->get($endpoint);
 
-        $responseParser = new ResponseParser($responseBody);
+        try {
+            $responseBody = $this->client->get($endpoint);
 
-        $response = $responseParser->parse();
+            $responseParser = new ResponseParser($responseBody);
+
+            $response = $responseParser->parse();
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+
 
         if ($response->status !== Response::STATUS_OK) {
             throw new \Exception($response->message);

@@ -4,8 +4,8 @@
 
 use \BookApiWrapper\BookApiWrapper;
 
-
 require_once 'mocks/MockAuthorRequest.php';
+require_once 'mocks/MockBadFormatRequest.php';
 
 class WrapperTest extends PHPUnit_Framework_TestCase
 {
@@ -26,5 +26,14 @@ class WrapperTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($authorsCount, count($authors));
         $first = $authors[0];
         $this->assertInstanceOf('BookApiWrapper\Entity\Author', $first);
+    }
+
+    public function testBadFormatResponse()
+    {
+        $client = new MockBadFormatRequest();
+        $wrapper = new BookApiWrapper($client);
+
+        $this->expectException(Exception::class);
+        $wrapper->getAuthors();
     }
 }
