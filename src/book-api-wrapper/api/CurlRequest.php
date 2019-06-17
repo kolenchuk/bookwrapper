@@ -2,6 +2,9 @@
 /**
  */
 
+namespace BookApiWrapper\Api;
+
+
 class CurlRequest
 {
     /**
