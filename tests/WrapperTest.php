@@ -51,4 +51,18 @@ class WrapperTest extends PHPUnit_Framework_TestCase
         $first = $books[0];
         $this->assertInstanceOf('BookApiWrapper\Entity\Book', $first);
     }
+
+    public function testGetAuthorsBooks()
+    {
+        $client = new MockBookRequest();
+        $wrapper = new BookApiWrapper($client);
+
+        $booksCount = 2;
+        $books = $wrapper->getAuthorBooks(1, $booksCount);
+        $this->assertInternalType('array', $books);
+
+        $this->assertEquals($booksCount, count($books));
+        $first = $books[0];
+        $this->assertInstanceOf('BookApiWrapper\Entity\Book', $first);
+    }
 }

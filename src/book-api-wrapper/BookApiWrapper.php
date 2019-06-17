@@ -45,4 +45,18 @@ class BookApiWrapper
     {
         return (new BooksList($this->client))->fetchAll($limit, $offset);
     }
+
+    /**
+     * fetch books filtered by author
+     *
+     * @param $authorId
+     * @param int $limit
+     * @param int $offset
+     * @return array
+     * @throws \Exception
+     */
+    public function getAuthorBooks($authorId, $limit = 0, $offset = 0)
+    {
+        return (new BooksList($this->client))->fetchAllByAuthorId($authorId, $limit, $offset);
+    }
 }

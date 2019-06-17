@@ -47,4 +47,15 @@ class EndpointBuilder
     {
         return static::getBaseEndpoint() . '/books' . static::getParams($limit, $offset);
     }
+
+    /**
+     * @param $authorId
+     * @param int $limit
+     * @param int $offset
+     * @return string
+     */
+    public static function getAuthorBooks($authorId, $limit = 0, $offset = 0)
+    {
+        return static::getBaseEndpoint() . '/authors/' . $authorId . '/books' . static::getParams($limit, $offset);
+    }
 }
