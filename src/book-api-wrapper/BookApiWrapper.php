@@ -50,6 +50,5 @@ class BookApiWrapper
             $list[] = new Author($author->id, $author->name);
         }
         return $list;
-
     }
 }

@@ -4,7 +4,7 @@
 
 namespace BookApiWrapper\Entity;
 
-class Author
+class Author extends BaseEntity
 {
     /**
      * @var int
@@ -18,9 +18,9 @@ class Author
 
     public function __construct(int $id, string $name)
     {
-        $this->_id = $id;
+        $this->id = $id;
 
-        $this->_name = $name;
+        $this->name = $name;
     }
 
     /**
@@ -54,6 +54,5 @@ class Author
     {
         $this->_name = $name;
     }
-
 
 }
