@@ -6,11 +6,8 @@ namespace BookApiWrapper;
 
 use BookApiWrapper\Api\ApiClientInterface;
 use BookApiWrapper\Api\CurlRequest;
-use BookApiWrapper\Api\EndpointBuilder;
-use BookApiWrapper\Api\Response;
-use BookApiWrapper\Api\ResponseParser;
-use BookApiWrapper\Entity\Author;
-use BookApiWrapper\Entity\Book;
+use BookApiWrapper\Entity\AuthorsList;
+use BookApiWrapper\Entity\BooksList;
 
 class BookApiWrapper
 {
@@ -27,56 +24,25 @@ class BookApiWrapper
         $this->client = $client;
     }
 
+    /**
+     * @param int $limit
+     * @param int $offset
+     * @return mixed
+     * @throws \Exception
+     */
     public function getAuthors($limit = 0, $offset = 0)
     {
-        $endpoint = EndpointBuilder::getAuthors($limit, $offset);
-
-        try {
-            $responseBody = $this->client->get($endpoint);
-
-            $responseParser = new ResponseParser($responseBody);
-
-            $response = $responseParser->parse();
-        } catch (\Exception $ex) {
-            throw new \Exception($ex->getMessage());
-        }
-
-
-        if ($response->status !== Response::STATUS_OK) {
-            throw new \Exception($response->message);
-        }
-
-        $list = [];
-        foreach ($response->data->authors as $author) {
-            $list[] = new Author($author->id, $author->name);
-        }
-        return $list;
+        return (new AuthorsList($this->client))->fetchAll($limit, $offset);
     }
 
+    /**
+     * @param int $limit
+     * @param int $offset
+     * @return mixed
+     * @throws \Exception
+     */
     public function getBooks($limit = 0, $offset = 0)
     {
-        $endpoint = EndpointBuilder::getBooks($limit, $offset);
-
-        try {
-            $responseBody = $this->client->get($endpoint);
-
-            $responseParser = new ResponseParser($responseBody);
-
-            $response = $responseParser->parse();
-        } catch (\Exception $ex) {
-            throw new \Exception($ex->getMessage());
-        }
-
-
-        if ($response->status !== Response::STATUS_OK) {
-            throw new \Exception($response->message);
-        }
-
-        $list = [];
-        foreach ($response->data->books as $book) {
-            $author = new Author($book->author->id, $book->author->name);
-            $list[] = new Book($book->id, $book->title, $author);
-        }
-        return $list;
+        return (new BooksList($this->client))->fetchAll($limit, $offset);
     }
 }
