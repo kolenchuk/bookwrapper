@@ -5,7 +5,7 @@
 
     "autoload": {
         "psr-4": {
-            "BookApiWrapper\\": "src/BookApiWrapper"
+            "BookApiWrapper\\": "src/book-api-wrapper"
         }
     }
 }
