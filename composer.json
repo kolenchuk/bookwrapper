@@ -1,7 +1,20 @@
 {
+    "name": "kolenchuk/bookwrapper",
+    "description": "Api wrapper for https://github.com/Chubik/phpdevtest/",
+    "type": "package",
     "require": {
+        "php": ">=7.1.0",
         "phpunit/phpunit": "^5.7"
     },
+    "license": "mit",
+    "authors": [
+        {
+            "name": "Dmytro Kolenchuk",
+            "email": "kolenchuk@gmail.com",
+            "homepage": "https://github.com/kolenchuk/"
+        }
+    ],
+    "minimum-stability": "dev",
 
     "autoload": {
         "psr-4": {
