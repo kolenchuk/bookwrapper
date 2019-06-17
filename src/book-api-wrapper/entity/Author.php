@@ -4,6 +4,14 @@
 
 namespace BookApiWrapper\Entity;
 
+/**
+ * Class Author
+ * @package BookApiWrapper\Entity
+ *
+ * @property int $id
+ * @property string $name
+ *
+ */
 class Author extends BaseEntity
 {
     /**
