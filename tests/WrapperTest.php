@@ -6,6 +6,7 @@ use \BookApiWrapper\BookApiWrapper;
 
 require_once 'mocks/MockAuthorRequest.php';
 require_once 'mocks/MockBadFormatRequest.php';
+require_once 'mocks/MockBookRequest.php';
 
 class WrapperTest extends PHPUnit_Framework_TestCase
 {
@@ -39,7 +40,8 @@ class WrapperTest extends PHPUnit_Framework_TestCase
 
     public function testGetBooks()
     {
-        $wrapper = new BookApiWrapper();
+        $client = new MockBookRequest();
+        $wrapper = new BookApiWrapper($client);
 
         $booksCount = 2;
         $books = $wrapper->getBooks($booksCount);
